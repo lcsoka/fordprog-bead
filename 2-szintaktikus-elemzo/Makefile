@@ -1,4 +1,4 @@
-COMPILERNAME=calculate
+COMPILERNAME=lang
 
 all: $(COMPILERNAME)
 	-

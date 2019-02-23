@@ -1,9 +1,7 @@
 %option noyywrap c++ yylineno
 
 %{
-#include <iostream>
-#include <cstdlib>
-#inclide "Parserbase.h"
+#include "Parserbase.h"
 %}
 
 LETTER      [a-zA-Z]
@@ -16,42 +14,42 @@ VARIABLE    {LETTER}({LETTER}|{DIGIT}|_)*
 {COMMENT}   // std::cout << "komment: " << YYText() << std::endl;
 
 "program"   return Parser::PROGRAM;
-"begin"     std::cout << "kulcsszo: " << YYText() << std::endl;
-"end"       std::cout << "kulcsszo: " << YYText() << std::endl;
-"natural"   std::cout << "kulcsszo: " << YYText() << std::endl;
-"boolean"   std::cout << "kulcsszo: " << YYText() << std::endl;
-"true"      std::cout << "kulcsszo: " << YYText() << std::endl;
-"false"     std::cout << "kulcsszo: " << YYText() << std::endl;
-"div"       std::cout << "kulcsszo: " << YYText() << std::endl;
-"mod"       std::cout << "kulcsszo: " << YYText() << std::endl;
-"and"       std::cout << "kulcsszo: " << YYText() << std::endl;
-"or"        std::cout << "kulcsszo: " << YYText() << std::endl;
-"not"       std::cout << "kulcsszo: " << YYText() << std::endl;
-"skip"      std::cout << "kulcsszo: " << YYText() << std::endl;
-"if"        std::cout << "kulcsszo: " << YYText() << std::endl;
-"then"      std::cout << "kulcsszo: " << YYText() << std::endl;
-"else"      std::cout << "kulcsszo: " << YYText() << std::endl;
-"elseif"    std::cout << "kulcsszo: " << YYText() << std::endl;
-"endif"     std::cout << "kulcsszo: " << YYText() << std::endl;
-"while"     std::cout << "kulcsszo: " << YYText() << std::endl;
-"do"        std::cout << "kulcsszo: " << YYText() << std::endl;
-"done"      std::cout << "kulcsszo: " << YYText() << std::endl;
-"read"      std::cout << "kulcsszo: " << YYText() << std::endl;
-"write"     std::cout << "kulcsszo: " << YYText() << std::endl;
+"begin"     return Parser::BEGIN_TOKEN;
+"end"       return Parser::END;
+"natural"   return Parser::NATURAL;
+"boolean"   return Parser::BOOLEAN;
+"true"      return Parser::TRUE;
+"false"     return Parser::FALSE;
+"div"       return Parser::DIV;
+"mod"       return Parser::MOD;
+"and"       return Parser::AND;
+"or"        return Parser::OR;
+"not"       return Parser::NOT;
+"skip"      return Parser::SKIP;
+"if"        return Parser::IF;
+"then"      return Parser::THEN;
+"else"      return Parser::ELSE;
+"elseif"    return Parser::ELSEIF;
+"endif"     return Parser::ENDIF;
+"while"     return Parser::WHILE;
+"do"        return Parser::DO;
+"done"      return Parser::DONE;
+"read"      return Parser::READ;
+"write"     return Parser::WRITE;
 
-{DIGIT}+    std::cout << "szam: " << YYText() << std::endl;
-{VARIABLE}  std::cout << "valtozo: " << YYText() << std::endl;
+{DIGIT}+    return Parser::NATURAL_LITERAL;
+{VARIABLE}  return Parser::IDENTIFIER;
 
-"("         std::cout << "zarojel: " << YYText() << std::endl;
-")"         std::cout << "zarojel: " << YYText() << std::endl;
-":="        std::cout << "operator: " << YYText() << std::endl;
-"-"         std::cout << "operator: " << YYText() << std::endl;
-"+"         std::cout << "operator: " << YYText() << std::endl;
-"*"         std::cout << "operator: " << YYText() << std::endl;
-"<"         std::cout << "operator: " << YYText() << std::endl;
-">"         std::cout << "operator: " << YYText() << std::endl;
-"="         std::cout << "operator: " << YYText() << std::endl;
-";"         std::cout << "separator: " << YYText() << std::endl;
+"("         return Parser::LEFT_PARENTHESIS;
+")"         return Parser::RIGHT_PARENTHESIS;
+":="        return Parser::ASSIGN;
+"-"         return Parser::MINUS;
+"+"         return Parser::PLUS;
+"*"         return Parser::MULTIPLY;
+"<"         return Parser::LESS_THAN;
+">"         return Parser::GREATER_THAN;
+"="         return Parser::EQUAL;
+";"         return Parser::SEMICOLON;
 
 {WS}+       // std::cout << "whitespace" << std::endl;
 .           {

@@ -1,7 +1,7 @@
 %baseclass-preinclude <iostream>
 %lsp-needed
 
-%token PROGRAM BEGIN END
+%token PROGRAM BEGIN_TOKEN END
 %token NATURAL BOOLEAN
 %token TRUE FALSE
 %token NOT
@@ -70,9 +70,9 @@ BOOLEAN
     }
 ;
 
-body: BEGIN expressions END
+body: BEGIN_TOKEN expressions END
     {
-        std::cout << "body -> BEGIN statements END" << std::endl;
+        std::cout << "body -> BEGIN_TOKEN statements END" << std::endl;
     }
 ;
 
@@ -112,6 +112,7 @@ if_statement
     {
         std::cout << "expression -> if_statement" << std::endl;
     }
+|
 skip
     {
         std::cout << "expression -> skip" << std::endl;
