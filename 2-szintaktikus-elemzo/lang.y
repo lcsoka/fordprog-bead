@@ -77,8 +77,9 @@ body: BEGIN_TOKEN expressions END
 ;
 
 expressions:
+expression 
     {
-        std::cout << "expressions -> \"\"" << std::endl;
+        std::cout << "expressions -> expression" << std::endl;
     }
 |
 expression expressions
