@@ -8,7 +8,8 @@
 
 inline void Parser::error(char const *msg)
 {
-    std::cerr << d_loc__.first_line << ".: Szintaktikus hiba." << std::endl; 
+    std::cerr << d_loc__.first_line << ".sor : Szintaktikus hiba." << std::endl; 
+    std::cerr << msg << std::endl; 
     exit(1);
 }
 
