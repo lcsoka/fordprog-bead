@@ -30,48 +30,42 @@
 
 start: program
     {
-        std::cout << "start -> program" << std::endl;
+        // std::cout << "start -> program" << std::endl;
     }
 ;
 
 program: header declarations body
     {
-        std::cout << "program -> header declarations body" << std::endl;
+        // std::cout << "program -> header declarations body" << std::endl;
     }
 ;
 
 header: PROGRAM IDENTIFIER
     {
-        std::cout << "header -> PROGRAM IDENTIFIER" << std::endl;
+        // std::cout << "header -> PROGRAM IDENTIFIER" << std::endl;
     }
 ;
 
 declarations:
     {
-        std::cout << "declarations -> \"\"" << std::endl;
+        // std::cout << "declarations -> \"\"" << std::endl;
     }
 |
 declaration declarations
     {
-        std::cout << "declarations -> declaration declarations" << std::endl;
+        // std::cout << "declarations -> declaration declarations" << std::endl;
     }
 ;
 
-declaration: type IDENTIFIER SEMICOLON
+declaration: 
+    NATURAL IDENTIFIER SEMICOLON
     {
-        std::cout << "declaration -> type IDENTIFIER ("<< *$2 << ") SEMICOLON" << std::endl;
-    }
-;
-
-type:
-NATURAL
-    {
-        std::cout << "type -> NATURAL" << std::endl;
+        insertSymbol(natural, *$2);
     }
 |
-BOOLEAN
+    BOOLEAN IDENTIFIER SEMICOLON
     {
-        std::cout << "type -> BOOLEAN" << std::endl;
+        insertSymbol(boolean, *$2);
     }
 ;
 

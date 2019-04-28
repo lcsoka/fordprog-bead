@@ -12,13 +12,13 @@ class Parser: public ParserBase
 {
         
     public:
-        typedef std::map<std::string,var_data> symbol_table;
+        typedef std::map<std::string,var_data> sym_table;
         Parser(std::istream& in) : lexer(&in, &std::cerr) {}
         int parse();
 
     private:
         yyFlexLexer lexer;
-        symbol_table symbols;
+        sym_table symbol_table;
         void error(char const *msg);    // called on (syntax) errors
         int lex();                      // returns the next token from the
                                         // lexical scanner. 
@@ -32,6 +32,17 @@ class Parser: public ParserBase
         void print__();
         void exceptionHandler__(std::exception const &exc);
         
+        void insertSymbol(type var_type, std::string name) {
+            if( symbol_table.count(name) > 0 )
+            {
+                std::stringstream ss;
+                ss << "Ujradeklaralt valtozo: " << name << ".\n"
+                << "Korabbi deklaracio sora: " << symbol_table[name].decl_row << std::endl;
+                error( ss.str().c_str() );
+            } else {
+                symbol_table[name] = var_data( d_loc__.first_line, var_type );
+            }
+        }
         // std::string typeToString(type var_type);
         // bool assertType(const std::string& owner, type expected, type actual);
         // bool assertType(const std::string& owner, type expected1, type expected2, type actual1, type actual2);
