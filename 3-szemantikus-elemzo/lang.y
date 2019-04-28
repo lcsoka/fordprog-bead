@@ -1,6 +1,11 @@
 %baseclass-preinclude "semantics.h"
 %lsp-needed
 
+%union
+{
+  std::string *szoveg;
+}
+
 %token PROGRAM BEGIN_TOKEN END
 %token NATURAL BOOLEAN
 %token TRUE FALSE
@@ -9,7 +14,7 @@
 %token IF THEN ELSE ELSEIF ENDIF
 %token WHILE DO DONE
 %token READ WRITE
-%token IDENTIFIER
+%token <szoveg> IDENTIFIER
 %token LEFT_PARENTHESIS RIGHT_PARENTHESIS
 %token ASSIGN
 %token SEMICOLON
@@ -54,7 +59,7 @@ declaration declarations
 
 declaration: type IDENTIFIER SEMICOLON
     {
-        std::cout << "declaration -> type IDENTIFIER SEMICOLON" << std::endl;
+        std::cout << "declaration -> type IDENTIFIER ("<< *$2 << ") SEMICOLON" << std::endl;
     }
 ;
 
